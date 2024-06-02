@@ -313,6 +313,8 @@ export const DEFAULT_OPTIONS = Object.freeze({
     ],
 
     autoBackupEnable: true,
+    autoBackupToBookmarksEnable: true,
+    autoBackupToFileEnable: true,
     autoBackupLastBackupTimeStamp: 1,
     autoBackupIntervalKey: AUTO_BACKUP_INTERVAL_KEY.days, // minutes, hours, days
     autoBackupIntervalValue: 1,

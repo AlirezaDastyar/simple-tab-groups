@@ -563,6 +563,14 @@
         "message": "Enable auto backup",
         "description": "Enable auto backup"
     },
+    "autoBackupToBookmarksEnableTitle": {
+        "message": "Enable auto backup to bookmarks",
+        "description": "Enable auto backup to bookmarks"
+    },
+    "autoBackupToFileEnableTitle": {
+        "message": "Enable auto backup to file",
+        "description": "Enable auto backup to file"
+    },
     "autoBackupCreateEveryTitle": {
         "message": "Create backup every:",
         "description": "Create backup every:"

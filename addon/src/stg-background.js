@@ -2799,7 +2799,7 @@ async function resetAutoBackup() {
     let timeToBackup = value * intervalSec + options.autoBackupLastBackupTimeStamp;
 
     if (now > timeToBackup) {
-        createBackup(options.autoBackupIncludeTabFavIcons, options.autoBackupIncludeTabThumbnails, true);
+        createBackup(options.autoBackupIncludeTabFavIcons, options.autoBackupIncludeTabThumbnails, true, options.autoBackupToFileEnable, options.autoBackupToBookmarksEnable);
         timer = value * intervalSec;
     } else {
         timer = timeToBackup - now;
@@ -2808,7 +2808,7 @@ async function resetAutoBackup() {
     _autoBackupTimer = setTimeout(resetAutoBackup, (timer + 10) * 1000);
 }
 
-async function createBackup(includeTabFavIcons, includeTabThumbnails, isAutoBackup = false) {
+async function createBackup(includeTabFavIcons, includeTabThumbnails, isAutoBackup = false, isAutoBackupToFile = false, isAutoBackupToBookmark = false) {
     const [
         data,
         { groups },
@@ -2864,12 +2864,16 @@ async function createBackup(includeTabFavIcons, includeTabThumbnails, isAutoBack
         containersToExport.forEach(cookieStoreId => data.containers[cookieStoreId] = allContainers[cookieStoreId]);
     }
 
-    if (isAutoBackup) {
+    if (isAutoBackup && (isAutoBackupToFile || isAutoBackupToBookmark)) {
         data.autoBackupLastBackupTimeStamp = options.autoBackupLastBackupTimeStamp = Utils.unixNow();
 
-        File.backup(data, true, options.autoBackupByDayIndex);
+        if (isAutoBackupToFile) {
+            File.backup(data, true, options.autoBackupByDayIndex);
+        }
 
-        exportAllGroupsToBookmarks(false, true);
+        if (isAutoBackupToBookmark){
+            exportAllGroupsToBookmarks(false, true);
+        }
 
         Storage.set({
             autoBackupLastBackupTimeStamp: data.autoBackupLastBackupTimeStamp,

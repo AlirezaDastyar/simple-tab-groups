@@ -920,24 +920,16 @@
                 </div>
                 <div v-if="options.autoBackupEnable" class="field">
                     <div class="field">
-                        <label class="checkbox" :disabled="!options.showTabsWithThumbnailsInManageGroups">
-                            <input v-if="options.showTabsWithThumbnailsInManageGroups" v-model="options.autoBackupIncludeTabThumbnails" type="checkbox" />
-                            <input v-else disabled="" type="checkbox" />
-                            <span v-text="lang('includeTabThumbnailsIntoBackup')"></span>
+                        <label class="checkbox">
+                            <input v-model="options.autoBackupToBookmarksEnable" type="checkbox" />
+                            <span v-text="lang('autoBackupToBookmarksEnableTitle')"></span>
                         </label>
                     </div>
                     <div class="field">
                         <label class="checkbox">
-                            <input v-model="options.autoBackupIncludeTabFavIcons" type="checkbox" />
-                            <span v-text="lang('includeTabFavIconsIntoBackup')"></span>
+                            <input v-model="options.autoBackupToFileEnable" type="checkbox" />
+                            <span v-text="lang('autoBackupToFileEnableTitle')"></span>
                         </label>
-                    </div>
-                    <div class="field">
-                        <label class="checkbox">
-                            <input v-model="options.autoBackupByDayIndex" type="checkbox" />
-                            <span v-text="lang('autoBackupByDayIndexTitle')"></span>
-                        </label>
-                        <p class="help is-medium" v-text="lang('autoBackupByDayIndexDescription')"></p>
                     </div>
 
                     <div class="field is-flex is-align-items-center indent-children">
@@ -957,24 +949,45 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="field">
                         <span v-text="lang('autoBackupLastBackupTitle')"></span>
                         <span v-if="options.autoBackupLastBackupTimeStamp > 1" v-text="new Date(options.autoBackupLastBackupTimeStamp * 1000).toLocaleString()"></span>
                         <span v-else>&mdash;</span>
                     </div>
+                    <div v-if="options.autoBackupToFileEnable" class="field">
+                        <div class="field">
+                            <label class="checkbox" :disabled="!options.showTabsWithThumbnailsInManageGroups">
+                                <input v-if="options.showTabsWithThumbnailsInManageGroups" v-model="options.autoBackupIncludeTabThumbnails" type="checkbox" />
+                                <input v-else disabled="" type="checkbox" />
+                                <span v-text="lang('includeTabThumbnailsIntoBackup')"></span>
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="checkbox">
+                                <input v-model="options.autoBackupIncludeTabFavIcons" type="checkbox" />
+                                <span v-text="lang('includeTabFavIconsIntoBackup')"></span>
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="checkbox">
+                                <input v-model="options.autoBackupByDayIndex" type="checkbox" />
+                                <span v-text="lang('autoBackupByDayIndexTitle')"></span>
+                            </label>
+                            <p class="help is-medium" v-text="lang('autoBackupByDayIndexDescription')"></p>
+                        </div>
 
-                    <!-- files -->
-                    <div class="field">
-                        <div class="field is-grouped is-align-items-center">
-                            <div class="control">
-                                <label class="field" v-text="lang('folderNameTitle') + ':'"></label>
-                            </div>
-                            <div class="control">
-                                <input type="text" v-model.trim="options.autoBackupFolderName" maxlength="200" class="input" />
-                            </div>
-                            <div class="control">
-                                <button class="button" @click="openBackupFolder" v-text="lang('openBackupFolder')"></button>
+                        <!-- files -->
+                        <div class="field">
+                            <div class="field is-grouped is-align-items-center">
+                                <div class="control">
+                                    <label class="field" v-text="lang('folderNameTitle') + ':'"></label>
+                                </div>
+                                <div class="control">
+                                    <input type="text" v-model.trim="options.autoBackupFolderName" maxlength="200" class="input" />
+                                </div>
+                                <div class="control">
+                                    <button class="button" @click="openBackupFolder" v-text="lang('openBackupFolder')"></button>
+                                </div>
                             </div>
                         </div>
                     </div>
